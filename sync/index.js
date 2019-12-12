@@ -1,2 +1,4 @@
-const BTNS_ABI = require('./btnsAbi')
+const mongolass = require('../module/mongo')
+const syncEvent = require('./event')
 
+syncEvent()

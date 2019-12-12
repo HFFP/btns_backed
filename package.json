@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=localhost nodemon index.js",
+    "start:api": "NODE_ENV=localhost nodemon index.js",
+    "start:syncEvent": "NODE_ENV=localhost nodemon ./sync/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,7 +15,9 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "config": "^3.2.4",
+    "cron": "^1.7.2",
     "ioredis": "^4.14.1",
     "koa": "^2.10.0",
     "koa-bodyparser": "^4.2.1",

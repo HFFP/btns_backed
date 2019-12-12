@@ -3,15 +3,13 @@ const mongolass = require('../module/mongo')
 
 const required = true
 
-const ABCTPrice = mongolass.model('abctprice', {
-  price_ratio: { type: 'number', required },
-  price_cny: { type: 'number', required },
-  price_usd: { type: 'number', required },
-  created_at: { type: Types.Date, required },
-  percent_change_ratio: { type: 'number', required },
-  percent_change_24h_ratio: { type: 'number', required },
-  percent_change_price: { type: 'number', required },
-  percent_change_24h_price: { type: 'number', required }
+const AddressInfo = mongolass.model('AddressInfo', {
+  address: { type: 'string', required },
+  invitationCode: { type: 'number' },
+  referrer: { type: 'number', default: 0 },
+  bootUp: { type: 'bool', default: false},
+  millType: { type: 'number', default: 0 },
+  bootUpTime: { type: Types.Date, default: 0}
 })
 
-module.exports = ABCTPrice
+module.exports = AddressInfo
