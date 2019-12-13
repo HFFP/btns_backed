@@ -1,7 +1,10 @@
 {
-  "name": "dexnode",
+  "name": "btns-backed",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": ">=10.15.3"
+  },
   "main": "index.js",
   "scripts": {
     "start:api": "NODE_ENV=localhost nodemon index.js",
