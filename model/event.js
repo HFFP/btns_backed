@@ -4,11 +4,14 @@ const mongolass = require('../module/mongo')
 const required = true
 
 const Event = mongolass.model('Event', {
-  transactionHash: { type: Types, required },
+  name: { type: 'string', required },
+  transactionHash: { type: 'string', required },
   timeStamp: { type: 'number', required},
   blockNumber: { type: 'number', required},
-  data: { type: Types.Mixed },
-  topics: { type: Types.Mixed }
+  data: { type: 'string' },
+  topics: { type: Types.Mixed },
+  eventName: { type: 'string'},
+  decode: { type: Types.Mixed },
 })
 
 module.exports = Event

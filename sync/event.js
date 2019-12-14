@@ -2,8 +2,11 @@ const BTNS_ABI = require('./btnsAbi')
 const config = require('config')
 const axios = require('axios').default
 const util = require('../module/utils')
-const Web3 = require('web3')
+const EventModel = require('../model/event')
+const registeredInvitationEvent = require('./eventManage/registeredInvitation')
+const exchangeEvent =  require('./eventManage/exchange')
 
+const Web3 = require('web3')
 const web3 = new Web3();
 
 const events = function(){
@@ -23,20 +26,46 @@ const events = function(){
 
 
 async function syncContractLogs () {
-  // TODO get lastBlock from db
-  const start = config.startBlock;
+  const lastSyncBlock = await EventModel.findOne().sort({blockNumber: -1});
+  const start = lastSyncBlock ? lastSyncBlock.blockNumber + 1: config.startBlock
 
   const api = `${config.etherScan}/?module=logs&action=getlogs&fromBlock=${start}&toBlock=latest&address=${config.btnsContract}&apikey=${config.apiKey}&sort=-timestamp`
   const {data} = await axios.get(api);
-  data.result.forEach(item => {
+  for (const item of data.result) {
     const topic = item.topics[0]
     const logs = web3.eth.abi.decodeLog(
       events[topic].input,
       item.data,
       item.topics.slice(1, item.topics.length)
     )
-    console.log(logs, events[topic].name)
-  })
+
+    //deal with
+    switch (events[topic].name) {
+      case 'RegisteredInvitation':
+        await registeredInvitationEvent(item, logs);
+        break;
+      case 'Exchange':
+        await exchangeEvent(item, logs);
+        break;
+    }
+
+    // recode event
+    await EventModel.updateOne({
+      transactionHash: item.transactionHash,
+    },{
+      $set: {
+        transactionHash: item.transactionHash,
+        timeStamp: web3.utils.hexToNumber(item.timeStamp),
+        blockNumber: web3.utils.hexToNumber(item.blockNumber),
+        data: item.data,
+        topics: item.topics,
+        decode: logs,
+        name: events[topic].name
+      }
+    },{
+      upsert: true
+    })
+  }
 }
 
 
