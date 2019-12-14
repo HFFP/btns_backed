@@ -4,13 +4,13 @@ const mongolass = require('../module/mongo')
 const required = true
 
 const Event = mongolass.model('Event', {
-  name: { type: 'string', required },
-  transactionHash: { type: 'string', required },
-  timeStamp: { type: 'number', required},
-  blockNumber: { type: 'number', required},
-  data: { type: 'string' },
+  name: { type: Types.String, required },
+  transactionHash: { type: Types.String, required },
+  timeStamp: { type: Types.Number, required},
+  blockNumber: { type: Types.Number, required},
+  data: { type: Types.String },
+  eventName: { type: Types.Number},
   topics: { type: Types.Mixed },
-  eventName: { type: 'string'},
   decode: { type: Types.Mixed },
 })
 

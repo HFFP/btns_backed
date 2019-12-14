@@ -4,12 +4,12 @@ const mongolass = require('../module/mongo')
 const required = true
 
 const AddressInfo = mongolass.model('Address', {
-  address: { type: 'string', required },
-  invitationCode: { type: 'string' },
-  referrer: { type: 'string', default: 0, required},
-  bootUp: { type: 'bool', default: false, required},
-  millType: { type: 'number', default: 0, required},
-  bootUpTime: { type: Types.Date, default: 0, required},
+  address: { type: Types.String, required },
+  invitationCode: { type: Types.String, required},
+  referrer: { type: Types.String, required, default: 0},
+  bootUp: { type: Types.Boolean, required, default: false},
+  millType: { type: Types.Number, required, default: 0},
+  bootUpTime: { type: Types.Date, required, default: 0},
 })
 
 module.exports = AddressInfo

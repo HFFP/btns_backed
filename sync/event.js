@@ -5,6 +5,10 @@ const util = require('../module/utils')
 const EventModel = require('../model/event')
 const registeredInvitationEvent = require('./eventManage/registeredInvitation')
 const exchangeEvent =  require('./eventManage/exchange')
+const bootUpEvent =  require('./eventManage/bootUp')
+const miningEvent =  require('./eventManage/mining')
+const updateMiningEvent =  require('./eventManage/updateMining')
+
 
 const Web3 = require('web3')
 const web3 = new Web3();
@@ -46,6 +50,15 @@ async function syncContractLogs () {
         break;
       case 'Exchange':
         await exchangeEvent(item, logs);
+        break;
+      case 'BootUp':
+        await bootUpEvent(item, logs);
+        break;
+      case 'Mining':
+        await miningEvent(item, logs);
+        break;
+      case 'UpdateMining':
+        await updateMiningEvent(item, logs);
         break;
     }
 
