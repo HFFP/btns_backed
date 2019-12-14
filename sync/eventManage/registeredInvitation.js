@@ -16,10 +16,6 @@ async function registeredInvitationEvent (event, logs) {
     await AddressModel.insertOne({
       address: logs.from,
       invitationCode: logs.code,
-      referrer: '0',
-      bootUp: false,
-      millType: 0,
-      bootUpTime: 0
     })
   }
 
