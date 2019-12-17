@@ -88,7 +88,7 @@ async function startSyncContractLogs () {
       const startTime = Date.now()
       await syncContractLogs()
       const duration = Date.now() - startTime
-      await util.sleep(duration > 10000 ? 0 : 10000 - duration)
+      await util.sleep(duration > 20000 ? 0 : 20000 - duration)
     } catch (e) {
       console.error(e)
     }

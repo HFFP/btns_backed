@@ -10,6 +10,8 @@ const AddressInfo = mongolass.model('Address', {
   bootUp: { type: Types.Boolean, required, default: false},
   millType: { type: Types.Number, required, default: 0},
   bootUpTime: { type: Types.Date, required, default: 0},
+  invitationList: { type: Types.Mixed, default: []},
+  invitationDetail: {type: Types.Mixed, default: {}}
 })
 
 module.exports = AddressInfo
