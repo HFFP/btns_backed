@@ -56,11 +56,20 @@ async function syncContractLogs () {
         index = await bootUpEvent(item, logs);
         break;
       case 'Mining':
-        await miningEvent(item, logs);
+        index = await miningEvent(item, logs);
         break;
       case 'UpdateMining':
-        await updateMiningEvent(item, logs);
+        index = await updateMiningEvent(item, logs);
         break;
+      // case 'BootUpAward':
+      //   await updateMiningEvent(item, logs);
+      //   break;
+      // case 'CommunityAward':
+      //   await updateMiningEvent(item, logs);
+      //   break;
+      // case 'CoinBase':
+      //   await updateMiningEvent(item, logs);
+      //   break;
     }
 
     // recode event

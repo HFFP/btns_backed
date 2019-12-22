@@ -11,7 +11,9 @@ const AddressInfo = mongolass.model('Address', {
   millType: { type: Types.Number, required, default: 0},
   miningTime: { type: Types.Date, required, default: 0},
   invitationList: { type: Types.Mixed, default: []},
-  invitationDetail: {type: Types.Mixed, default: {}}
+  invitationDetail: {type: Types.Mixed, default: {}},
+  communityAward1: { type: Types.Boolean, default: false},
+  communityAward2: { type: Types.Boolean, default: false}
 })
 
 module.exports = AddressInfo

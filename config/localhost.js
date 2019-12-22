@@ -4,11 +4,11 @@ module.exports = {
     connectionStringURI: 'mongodb://127.0.0.1:27017/btns'
   },
   etherScan: 'http://api-ropsten.etherscan.io/api',
-  btnsContract: '0xb75c062FC42640ce1b1c3898B609c9988E236414',
+  btnsContract: '0x19467914271365e427caC6d5C478d6523d8FfC3a',
   startBlock: 6956250,
   apiKey: '',
-  ethAddress: '0xe60f945b5fa4bfd252cce13f2ea6a6c468fd47c2',
-  ethPrivateKey: 'F21C737E2D83705B494553EB674D74010E57380103E3097BF75B9165E79B1DF1',
+  ethAddress: '0x3460bc9e7059ad8b1245d1961e90b121f8b2bcba',
+  ethPrivateKey: 'F8FE18C01C58B4C4740A7EDC65152B5964979D017B5D787F1D55EF1F67E0698D',
   network: 'ropsten',
   provider: "https://ropsten.infura.io/v3/3248083ccd694c02809beab6472443f2",
 }
