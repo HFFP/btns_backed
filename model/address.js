@@ -9,7 +9,7 @@ const AddressInfo = mongolass.model('Address', {
   referrer: { type: Types.String, required, default: '0'},
   bootUp: { type: Types.Boolean, required, default: false},
   millType: { type: Types.Number, required, default: 0},
-  bootUpTime: { type: Types.Date, required, default: 0},
+  miningTime: { type: Types.Date, required, default: 0},
   invitationList: { type: Types.Mixed, default: []},
   invitationDetail: {type: Types.Mixed, default: {}}
 })

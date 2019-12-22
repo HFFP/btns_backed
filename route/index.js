@@ -1,11 +1,12 @@
 const Router = require('koa-router')
-const OrderBook = require('../controller/OrderBook')
+const AddressInfo = require('../controller/addressInfo')
 
-const orderBook = new OrderBook()
+const addressInfo = new AddressInfo()
 const router = new Router()
 
 //
-router.get('/api/getOrderBook/', orderBook.getOrderBook)
+router.get('/api/invitationTree/:address', addressInfo.getInvitationTree)
+router.get('/api/addressInfo/:address', addressInfo.getAddressInfo)
 
 module.exports = function (app) {
   app
