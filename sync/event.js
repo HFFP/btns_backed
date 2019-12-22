@@ -43,16 +43,17 @@ async function syncContractLogs () {
       item.topics.slice(1, item.topics.length)
     )
 
+    let index = ''
     //deal with
     switch (events[topic].name) {
       case 'RegisteredInvitation':
-        await registeredInvitationEvent(item, logs);
+        index = await registeredInvitationEvent(item, logs);
         break;
       case 'Exchange':
-        await exchangeEvent(item, logs);
+        index = await exchangeEvent(item, logs);
         break;
       case 'BootUp':
-        await bootUpEvent(item, logs);
+        index = await bootUpEvent(item, logs);
         break;
       case 'Mining':
         await miningEvent(item, logs);
@@ -73,7 +74,8 @@ async function syncContractLogs () {
         data: item.data,
         topics: item.topics,
         decode: logs,
-        name: events[topic].name
+        name: events[topic].name,
+        index: index
       }
     },{
       upsert: true

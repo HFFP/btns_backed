@@ -24,6 +24,7 @@ async function exchangeEvent (event, logs) {
     })
     await updateInvitationTree(logs.iCode, address.ops[0], 1)
   }
+  return logs.from;
 }
 
 async function updateInvitationTree(iCode, address, level) {

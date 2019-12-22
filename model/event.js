@@ -12,6 +12,7 @@ const Event = mongolass.model('Event', {
   eventName: { type: Types.Number},
   topics: { type: Types.Mixed },
   decode: { type: Types.Mixed },
+  index: { type: Types.String }  // 用来关联地址
 })
 
 module.exports = Event

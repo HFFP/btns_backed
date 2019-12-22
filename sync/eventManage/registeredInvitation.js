@@ -18,7 +18,7 @@ async function registeredInvitationEvent (event, logs) {
       invitationCode: logs.code,
     })
   }
-
+  return logs.from
 }
 
 module.exports = registeredInvitationEvent
