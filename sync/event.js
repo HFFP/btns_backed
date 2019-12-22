@@ -8,6 +8,11 @@ const exchangeEvent =  require('./eventManage/exchange')
 const bootUpEvent =  require('./eventManage/bootUp')
 const miningEvent =  require('./eventManage/mining')
 const updateMiningEvent =  require('./eventManage/updateMining')
+const communityAwardEvent = require('./eventManage/communityAward')
+const bootUpAwardEvent = require('./eventManage/bootUpAward')
+const coinbaseEvent = require('./eventManage/coinbase')
+
+
 
 
 const Web3 = require('web3')
@@ -61,15 +66,15 @@ async function syncContractLogs () {
       case 'UpdateMining':
         index = await updateMiningEvent(item, logs);
         break;
-      // case 'BootUpAward':
-      //   await updateMiningEvent(item, logs);
-      //   break;
-      // case 'CommunityAward':
-      //   await updateMiningEvent(item, logs);
-      //   break;
-      // case 'CoinBase':
-      //   await updateMiningEvent(item, logs);
-      //   break;
+      case 'BootUpAward':
+        index = await bootUpAwardEvent(item, logs);
+        break;
+      case 'CommunityAward':
+        index = await communityAwardEvent(item, logs);
+        break;
+      case 'CoinBase':
+        index = await coinbaseEvent(item, logs);
+        break;
     }
 
     // recode event
