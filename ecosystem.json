@@ -1,0 +1,34 @@
+{
+  "apps" : [
+    {
+      "name"      : "btns-sync",
+      "instance_var":"btns-sync",
+      "script"    : "./sync/index.js",
+      "instances" : 1,
+      "exec_mode" : "cluster",
+      "watch"     : false,
+      "ignore_watch" : ["logs"],
+      "error_file":"logs/btns-sync.stderr.log",
+      "out_file"  :"logs/btns-sync.stdout.log",
+      "log_date_format": "MM-DD HH:mm:ss",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name"      : "btns-api",
+      "instance_var":"btns-api",
+      "script"    : "./index.js",
+      "instances" : 0,
+      "exec_mode" : "cluster",
+      "watch"     : false,
+      "ignore_watch" : ["logs"],
+      "error_file":"logs/btns-api.stderr.log",
+      "out_file"  :"logs/btns-api.stdout.log",
+      "log_date_format": "MM-DD HH:mm:ss",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
