@@ -5,17 +5,17 @@ class AddressInfoController {
     const address = await AddressInfoModel.findOne({address: ctx.params.address});
 
     ctx.res.ok({
-      body: address.invitationDetail
+      body: address ? address.invitationDetail : {}
     })
   }
 
   async getAddressInfo (ctx) {
     const address = await AddressInfoModel.findOne({address: ctx.params.address});
     ctx.res.ok({
-      body: {
+      body: address ? {
         bootUp: address.bootUp,
         miningTime: new Date(address.miningTime).getTime()
-      }
+      } : {}
     })
   }
 }
