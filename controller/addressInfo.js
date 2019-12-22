@@ -1,4 +1,6 @@
 const AddressInfoModel = require('../model/address')
+const EventModel = require('../model/event')
+const { queryToPagination } = require('../module/utils')
 
 class AddressInfoController {
   async getInvitationTree (ctx) {
@@ -16,6 +18,33 @@ class AddressInfoController {
         bootUp: address.bootUp,
         miningTime: new Date(address.miningTime).getTime()
       } : {}
+    })
+  }
+
+  async getTransactions (ctx) {
+    const pagination = queryToPagination(ctx.query)
+    const txs = await EventModel.find({
+      index: ctx.params.address
+    }).limit(pagination.limit)
+      .skip(pagination.offset)
+      .sort({ _id: -1 })
+
+    ctx.res.ok({
+      body: txs
+    })
+  }
+
+  async getMinerTx (ctx) {
+    const pagination = queryToPagination(ctx.query)
+    const txs = await EventModel.find({
+      index: ctx.params.address,
+      name: 'CoinBase'
+    }).limit(pagination.limit)
+      .skip(pagination.offset)
+      .sort({ _id: -1 })
+
+    ctx.res.ok({
+      body: txs
     })
   }
 }

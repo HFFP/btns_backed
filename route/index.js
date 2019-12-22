@@ -4,9 +4,15 @@ const AddressInfo = require('../controller/addressInfo')
 const addressInfo = new AddressInfo()
 const router = new Router()
 
-//
+// 邀请树
 router.get('/api/invitationTree/:address', addressInfo.getInvitationTree)
+// 地址信息
 router.get('/api/addressInfo/:address', addressInfo.getAddressInfo)
+// 地址所有交易记录
+router.get('/api/transactions/:address', addressInfo.getTransactions)
+// 地址挖矿产出记录
+router.get('/api/miner_tx/:address', addressInfo.getMinerTx)
+
 
 module.exports = function (app) {
   app
