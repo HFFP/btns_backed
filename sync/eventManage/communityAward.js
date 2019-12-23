@@ -1,7 +1,7 @@
 const AddressModel = require('../../model/address')
 
 async function communityAwardEvent (event, logs) {
-  console.log('updateMiningEvent')
+  console.log('communityAwardEvent')
 
   // update address info
   if (logs.amount === '5255000000000000000000') {
