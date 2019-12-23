@@ -11,6 +11,7 @@ const updateMiningEvent =  require('./eventManage/updateMining')
 const communityAwardEvent = require('./eventManage/communityAward')
 const bootUpAwardEvent = require('./eventManage/bootUpAward')
 const coinbaseEvent = require('./eventManage/coinbase')
+const btnsContract = require('../module/btnsContract')
 
 
 
@@ -38,9 +39,10 @@ async function syncContractLogs () {
   const lastSyncBlock = await EventModel.findOne().sort({blockNumber: -1});
   const start = lastSyncBlock ? lastSyncBlock.blockNumber + 1: config.startBlock
 
-  const api = `${config.etherScan}/?module=logs&action=getlogs&fromBlock=${start}&toBlock=latest&address=${config.btnsContract}&apikey=${config.apiKey}&sort=-timestamp`
-  const {data} = await axios.get(api);
-  for (const item of data.result) {
+  // const api = `${config.etherScan}/?module=logs&action=getlogs&fromBlock=${start}&toBlock=latest&address=${config.btnsContract}&apikey=${config.apiKey}&sort=-timestamp`
+  // const {data} = await axios.get(api);
+  const data = await btnsContract.getPastLogs(config.btnsContract, start)
+  for (const item of data) {
     const topic = item.topics[0]
     const logs = web3.eth.abi.decodeLog(
       events[topic].input,
@@ -78,12 +80,13 @@ async function syncContractLogs () {
     }
 
     // recode event
+    const blockData = await btnsContract.getBlock(item.blockNumber);
     await EventModel.updateOne({
       transactionHash: item.transactionHash,
     },{
       $set: {
         transactionHash: item.transactionHash,
-        timeStamp: web3.utils.hexToNumber(item.timeStamp),
+        timeStamp: blockData.timestamp * 1000,
         blockNumber: web3.utils.hexToNumber(item.blockNumber),
         data: item.data,
         topics: item.topics,

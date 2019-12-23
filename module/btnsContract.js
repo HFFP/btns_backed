@@ -54,4 +54,15 @@ async function getGasPrice () {
   return await web3.eth.getGasPrice()
 }
 
-module.exports = {sendBootUpAward, sendCommunityAward}
+async function getPastLogs (address, fromBlock) {
+  return await web3.eth.getPastLogs({
+    address,
+    fromBlock
+  })
+}
+
+async function getBlock (num) {
+  return await web3.eth.getBlock(num)
+}
+
+module.exports = {sendBootUpAward, sendCommunityAward, getPastLogs, getBlock}

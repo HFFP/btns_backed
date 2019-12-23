@@ -6,7 +6,7 @@ const required = true
 const Event = mongolass.model('Event', {
   name: { type: Types.String, required },
   transactionHash: { type: Types.String, required },
-  timeStamp: { type: Types.Number, required},
+  timeStamp: { type: Types.Date, required},
   blockNumber: { type: Types.Number, required},
   data: { type: Types.String },
   eventName: { type: Types.Number},
