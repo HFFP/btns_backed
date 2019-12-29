@@ -27,7 +27,11 @@ class AddressInfoController {
       index: ctx.params.address
     }
     if (ctx.query.name) {
-      query.name = ctx.query.name
+      if (ctx.query.name === 'Mining'){
+        query.name = {$in: ['Mining', 'BootUp']}
+      } else {
+        query.name = ctx.query.name
+      }
     }
     const txs = await EventModel.find(query).limit(pagination.limit)
       .skip(pagination.offset)
