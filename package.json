@@ -10,7 +10,8 @@
     "dev:syncEvent": "pm2 reload ecosystem.json --only btns-sync --watch",
     "dev:api": "pm2 reload ecosystem.json --only btns-api --watch",
     "start:api": "NODE_ENV=localhost nodemon index.js",
-    "start:syncEvent": "NODE_ENV=localhost nodemon ./sync/index.js"
+    "start:syncEvent": "NODE_ENV=localhost nodemon ./sync/index.js",
+    "start:miningAward": "NODE_ENV=localhost nodemon ./cronJob/index.js"
   },
   "author": "",
   "license": "ISC",

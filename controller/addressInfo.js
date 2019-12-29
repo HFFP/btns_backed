@@ -23,9 +23,13 @@ class AddressInfoController {
 
   async getTransactions (ctx) {
     const pagination = queryToPagination(ctx.query)
-    const txs = await EventModel.find({
+    const query = {
       index: ctx.params.address
-    }).limit(pagination.limit)
+    }
+    if (ctx.query.name) {
+      query.name = ctx.query.name
+    }
+    const txs = await EventModel.find(query).limit(pagination.limit)
       .skip(pagination.offset)
       .sort({ _id: -1 })
 
