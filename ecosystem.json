@@ -29,6 +29,21 @@
       "env": {
         "NODE_ENV": "development"
       }
+    },
+    {
+      "name"      : "btns-mining",
+      "instance_var":"btns-mining",
+      "script"    : "./cronJob/index.js",
+      "instances" : 1,
+      "exec_mode" : "cluster",
+      "watch"     : false,
+      "ignore_watch" : ["logs"],
+      "error_file":"logs/btns-mining.stderr.log",
+      "out_file"  :"logs/btns-mining.stdout.log",
+      "log_date_format": "MM-DD HH:mm:ss",
+      "env": {
+        "NODE_ENV": "development"
+      }
     }
   ]
 }

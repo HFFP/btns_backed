@@ -1,4 +1,4 @@
 const mongolass = require('../module/mongo')
-const startSendMiningAward = require('./senMiningAward')
+const startSendMiningAward = require('./sendMiningAward')
 
 startSendMiningAward()

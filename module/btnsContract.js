@@ -46,6 +46,26 @@ async function sendCommunityAward(address, level) {
   console.log(transaction.transactionHash)
 }
 
+async function sendMiningAward(users, powers) {
+  const rawTransaction = {
+    nonce: await getNonce(),
+    from: config.ethAddress,
+    to: config.btnsContract,
+    gasPrice: web3.utils.toHex(await getGasPrice()),
+    gasLimit: web3.utils.toHex(300000),
+    value: '0x0',
+    data: btnsContract.methods.sendMiningAward(users, powers).encodeABI()
+  }
+  const tx = new Transaction(rawTransaction, {chain: config.network})
+  const pk = Buffer.from(config.ethPrivateKey, 'hex')
+  tx.sign(pk)
+  const signedTx = '0x' + tx.serialize().toString('hex')
+  const transaction = await web3.eth.sendSignedTransaction(signedTx).catch(err => {
+    throw new Error(err.message, err.stack);
+  });
+  console.log(transaction.transactionHash)
+}
+
 async function getNonce () {
   return await web3.eth.getTransactionCount(config.ethAddress)
 }
@@ -65,4 +85,4 @@ async function getBlock (num) {
   return await web3.eth.getBlock(num)
 }
 
-module.exports = {sendBootUpAward, sendCommunityAward, getPastLogs, getBlock}
+module.exports = {sendBootUpAward, sendCommunityAward, sendMiningAward, getPastLogs, getBlock}
