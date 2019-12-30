@@ -83,6 +83,7 @@ async function syncContractLogs () {
     const blockData = await btnsContract.getBlock(item.blockNumber);
     await EventModel.updateOne({
       transactionHash: item.transactionHash,
+      index: index
     },{
       $set: {
         transactionHash: item.transactionHash,
